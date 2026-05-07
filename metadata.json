@@ -1,6 +1,6 @@
 {
-  "name": "Remix: AtlasBlock - Shopify Interactive Map",
-  "description": "Interactive, high-performance map sections for Shopify storefronts. Customizable pins, premium UI, and zero-config setup.",
+  "name": "Atlas Store Locator - Shopify Theme Extension",
+  "description": "A high-performance, interactive store locator designed for Shopify Theme App Extensions. Features a premium UI, mobile-responsive list/map views, and custom pins.",
   "requestFramePermissions": [
     "geolocation"
   ],
