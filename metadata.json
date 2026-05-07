@@ -1,0 +1,8 @@
+{
+  "name": "Remix: AtlasBlock - Shopify Interactive Map",
+  "description": "Interactive, high-performance map sections for Shopify storefronts. Customizable pins, premium UI, and zero-config setup.",
+  "requestFramePermissions": [
+    "geolocation"
+  ],
+  "majorCapabilities": []
+}

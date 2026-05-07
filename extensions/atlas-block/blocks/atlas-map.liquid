@@ -1,0 +1,95 @@
+{% comment %}
+  AtlasBlock Store Locator
+  This file would reside in your Shopify Theme App Extension folder:
+  /extensions/atlas-block/blocks/atlas-map.liquid
+{% endcomment %}
+
+<div 
+  id="atlas-block-root"
+  class="atlas-block-container"
+  data-settings='{{ block.settings | json }}'
+  data-locations='[
+    {% for res in section.blocks %}
+      {% if res.type == "location" %}
+        {
+          "id": "{{ res.id }}",
+          "name": "{{ res.settings.name | escape }}",
+          "lat": {{ res.settings.lat | default: 0 }},
+          "lng": {{ res.settings.lng | default: 0 }},
+          "address": "{{ res.settings.address | escape }}",
+          "description": "{{ res.settings.description | escape }}",
+          "imageUrl": "{{ res.settings.image | img_url: '400x' }}",
+          "linkText": "{{ res.settings.link_text | escape }}",
+          "linkUrl": "{{ res.settings.link_url }}"
+        }{% unless forloop.last %},{% endunless %}
+      {% endif %}
+    {% endfor %}
+  ]'
+></div>
+
+<style>
+  .atlas-block-container {
+    width: 100%;
+    margin: {{ section.settings.margin_top }}px 0 {{ section.settings.margin_bottom }}px;
+  }
+</style>
+
+<script src="{{ 'atlas-block.bundle.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Atlas Map",
+  "target": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "map_height",
+      "label": "Map Height",
+      "default": "600px"
+    },
+    {
+      "type": "color",
+      "id": "marker_color",
+      "label": "Marker Color",
+      "default": "#3b82f6"
+    },
+    {
+      "type": "select",
+      "id": "theme",
+      "label": "Map Theme",
+      "options": [
+        { "value": "light", "label": "Light" },
+        { "value": "dark", "label": "Dark" }
+      ],
+      "default": "light"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_sidebar",
+      "label": "Show Location Sidebar",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "location",
+      "name": "Location",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Location Name" },
+        { "type": "text", "id": "lat", "label": "Latitude" },
+        { "type": "text", "id": "lng", "label": "Longitude" },
+        { "type": "text", "id": "address", "label": "Address" },
+        { "type": "textarea", "id": "description", "label": "Description" },
+        { "type": "image_picker", "id": "image", "label": "Store Image" },
+        { "type": "text", "id": "link_text", "label": "Button Text" },
+        { "type": "url", "id": "link_url", "label": "Button Link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Atlas Store Locator"
+    }
+  ]
+}
+{% endschema %}
